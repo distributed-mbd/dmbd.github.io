@@ -156,43 +156,6 @@ h3 {
 
 
 
-/* ---------- Method Overview ---------- */
-
-
-.overview {
-
-    display: flex;
-
-    gap: 40px;
-
-    align-items: center;
-
-}
-
-
-.overview img {
-
-    width: 50%;
-
-    border-radius: 10px;
-
-    box-shadow:
-    0px 3px 12px rgba(0,0,0,0.12);
-
-}
-
-
-.overview p {
-
-    width: 50%;
-
-    font-size: 20px;
-
-    line-height: 1.8;
-
-}
-
-
 
 /* ---------- Results ---------- */
 
@@ -352,17 +315,18 @@ pre {
 
 
     .overview {
-
-        flex-direction:column;
-
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
+    .overview img {
+        width: 100%;
+        max-width: 1050px;
+    }
 
-    .overview img,
     .overview p {
-
-        width:100%;
-
+        width: 100%;
     }
 
 
@@ -480,7 +444,7 @@ Distributed Model-Based Diffusion For Scalable Multi-Robot Trajectory Optimizati
         TL;DR
     </div>
 
-Distributed Model-Based Diffusion (DMBD) distributes the diffusion denoising process across robots through local conditional updates, enabling scalable and coordinated trajectory optimization for multi-robot teams.
+<b>Distributed Model-Based Diffusion (DMBD)</b> distributes the diffusion denoising process across robots through local conditional diffusion denoising processes, enabling scalable and coordinated trajectory optimization for multi-robot teams. By performing local conditional denoising at each denoisng step, DMBD increases the sample efficiency and improves scalability with increasing team size.
 
 </div>
 
@@ -494,7 +458,7 @@ Trajectory optimization for multi-robot systems remains challenging due to
 high-dimensional coupled trajectory spaces and non-convex interaction constraints.
 We propose <b>Distributed Model-Based Diffusion (DMBD)</b>, a distributed
 server-robot framework that decomposes the reverse diffusion process into
-local conditional denoising processe for each robot to perform independently.
+local conditional diffusion denoising processes for each robot to perform independently.
 
 By decomposing the global inference problem from the joint multi-robot trajectory space into individual robot trajectory spaces, DMBD reduces the complexity of the optimization problem and improves scalability with increasing team size. Furthermore, DMBD provides a modular formulation in which each robot only requires knowledge of its own dynamics, objectives, and constraints, while coordination is achieved through trajectory information broadcast by a server. Extensive experiments demonstrate that DMBD enables scalable, sample-efficient, and coordinated planning across challenging multi-robot tasks.
 
@@ -508,7 +472,7 @@ By decomposing the global inference problem from the joint multi-robot trajector
 
 <div class="overview">
 
-<img src="static/images/hero.svg">
+<img src="static/images/hero.svg" style="width: 100%; display: block;">
 
 
 <p>
