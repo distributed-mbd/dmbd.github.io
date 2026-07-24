@@ -444,7 +444,7 @@ Distributed Model-Based Diffusion For Scalable Multi-Robot Trajectory Optimizati
         TL;DR
     </div>
 
-<b>Distributed Model-Based Diffusion (DMBD)</b> distributes the diffusion denoising process across robots through local conditional diffusion denoising processes, enabling scalable and coordinated trajectory optimization for multi-robot teams. By performing local conditional denoising at each denoisng step, DMBD increases the sample efficiency and improves scalability with increasing team size.
+<b>Distributed Model-Based Diffusion (DMBD)</b> distributes the diffusion denoising process across robots through local conditional diffusion denoising processes, enabling scalable and coordinated trajectory optimization for multi-robot teams. Each robot performs diffusion denoising process on its own trajectory while conditioning on the current trajectory estimates of the other robots at every denoising step. This effectively decomposes the joint trajectory optimization problem into a set of coupled local optimization problems, improving sample efficiency and scalability with increasing team size.
 
 </div>
 
