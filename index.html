@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async
+src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Distributed Model-Based Diffusion: Distributed Denoising For Scalable Multi-Robot Trajectory Optimization
+    </title>
+
+   <style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Arial", "Helvetica", sans-serif;
+    margin: 0;
+    background: #ffffff;
+    color: #333;
+    line-height: 1.6;
+    font-size: 20px;
+}
+
+
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 50px 35px;
+}
+
+
+/* ---------- Title ---------- */
+
+h1 {
+    text-align: center;
+    font-size: 42px;
+    line-height: 1.2;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #222;
+}
+
+
+h2 {
+    margin-top: 65px;
+    margin-bottom: 25px;
+    font-size: 32px;
+    font-weight: 700;
+    color: #222;
+}
+
+
+h3 {
+    margin-top: 45px;
+    font-size: 27px;
+    color: #333;
+}
+
+
+/* ---------- Authors ---------- */
+
+.authors {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 8px;
+}
+
+
+.affiliation {
+    text-align: center;
+    font-size: 17px;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+
+
+/* ---------- Buttons ---------- */
+
+.buttons {
+    text-align: center;
+    margin: 35px 0;
+}
+
+
+.button {
+    display: inline-block;
+    padding: 12px 28px;
+    margin: 6px;
+    border-radius: 8px;
+
+    background: #222;
+    color: white;
+
+    text-decoration: none;
+    font-size: 17px;
+
+    transition: 0.2s ease;
+}
+
+
+.button:hover {
+    background: #555;
+    transform: translateY(-2px);
+}
+
+
+
+/* ---------- Hero Figure ---------- */
+
+.hero {
+    text-align: center;
+    margin-top: 45px;
+}
+
+
+.hero img {
+    width: 100%;
+    max-width: 1050px;
+
+    border-radius: 12px;
+
+    box-shadow:
+    0px 4px 18px rgba(0,0,0,0.12);
+}
+
+
+.caption {
+    text-align: center;
+    font-size: 15px;
+    color: #666;
+
+    margin-top: 12px;
+}
+
+
+
+/* ---------- Abstract ---------- */
+
+.abstract {
+
+    font-size: 20px;
+    line-height: 1.8;
+
+    text-align: justify;
+
+    margin-top: 20px;
+}
+
+
+
+/* ---------- Method Overview ---------- */
+
+
+.overview {
+
+    display: flex;
+
+    gap: 40px;
+
+    align-items: center;
+
+}
+
+
+.overview img {
+
+    width: 50%;
+
+    border-radius: 10px;
+
+    box-shadow:
+    0px 3px 12px rgba(0,0,0,0.12);
+
+}
+
+
+.overview p {
+
+    width: 50%;
+
+    font-size: 20px;
+
+    line-height: 1.8;
+
+}
+
+
+
+/* ---------- Results ---------- */
+
+.results {
+
+    font-size: 20px;
+
+    line-height: 1.8;
+
+}
+
+
+.results ul {
+
+    margin-top: 20px;
+
+}
+
+
+.results li {
+
+    margin-bottom: 10px;
+
+}
+
+
+
+/* ---------- Video Grid ---------- */
+
+.video-container {
+    margin-top: 35px;
+}
+
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.video-item {
+    text-align: center;
+}
+
+.video-item video {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0px 3px 15px rgba(0,0,0,0.15);
+}
+
+.video-caption {
+    margin-top: 8px;
+    font-size: 20px;
+    color: #555;
+}
+
+
+
+/* ---------- Tables ---------- */
+
+
+table {
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:25px;
+
+    font-size:16px;
+
+}
+
+
+th {
+
+    background:#f5f5f5;
+
+    font-weight:600;
+
+}
+
+
+th, td {
+
+    padding:14px;
+
+    border:1px solid #ddd;
+
+    text-align:center;
+
+}
+
+
+
+/* ---------- Code / Citation ---------- */
+
+
+pre {
+
+    background:#f7f7f7;
+
+    padding:20px;
+
+    border-radius:8px;
+
+    overflow-x:auto;
+
+    font-size:14px;
+
+}
+
+
+
+/* ---------- Footer ---------- */
+
+
+.footer {
+
+    margin-top:80px;
+
+    text-align:center;
+
+    color:#777;
+
+    padding-bottom:40px;
+
+}
+
+
+
+/* ---------- Responsive ---------- */
+
+
+@media(max-width:900px){
+
+
+    .container {
+
+        padding:35px 20px;
+
+    }
+
+
+    h1 {
+
+        font-size:32px;
+
+    }
+
+
+    h2 {
+
+        font-size:26px;
+
+    }
+
+
+    .overview {
+
+        flex-direction:column;
+
+    }
+
+
+    .overview img,
+    .overview p {
+
+        width:100%;
+
+    }
+
+
+    .video-grid {
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+
+@media(max-width:500px){
+
+
+    h1 {
+
+        font-size:26px;
+
+    }
+
+
+    .button {
+
+        display:block;
+
+        margin:10px auto;
+
+        width:80%;
+
+    }
+
+
+    .abstract {
+
+        font-size:16px;
+
+    }
+
+}
+
+
+.tldr {
+
+    background: #f7f7f7;
+
+    border-left: 6px solid #222;
+
+    padding: 20px 25px;
+
+    margin: 35px auto;
+
+    max-width: 1000px;
+
+    border-radius: 8px;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+}
+
+
+.tldr-title {
+
+    font-weight: 700;
+
+    font-size: 22px;
+
+    margin-bottom: 10px;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+<h1>
+Distributed Model-Based Diffusion For Scalable Multi-Robot Trajectory Optimization
+</h1>
+
+
+<div class="authors">
+    Anonymous Authors
+</div>
+
+
+
+
+<div class="buttons">
+
+<a class="button" href="https://arxiv.org/pdf/2607.20992">
+    📄 Paper
+</a>
+
+<a class="button" href="https://github.com/distributed-mbd/dmbd">
+    💻 Code
+</a>
+
+
+</div>
+
+
+<div class="tldr">
+
+    <div class="tldr-title">
+        TL;DR
+    </div>
+
+Distributed Model-Based Diffusion (DMBD) distributes the diffusion denoising process across robots through local conditional updates, enabling scalable and coordinated trajectory optimization for multi-robot teams.
+
+</div>
+
+
+
+<h2>Abstract</h2>
+
+<p class="abstract">
+
+Trajectory optimization for multi-robot systems remains challenging due to
+high-dimensional coupled trajectory spaces and non-convex interaction constraints.
+We propose <b>Distributed Model-Based Diffusion (DMBD)</b>, a distributed
+server-robot framework that decomposes the reverse diffusion process into
+local conditional denoising processe for each robot to perform independently.
+
+By decomposing the global inference problem from the joint multi-robot trajectory space into individual robot trajectory spaces, DMBD reduces the complexity of the optimization problem and improves scalability with increasing team size. Furthermore, DMBD provides a modular formulation in which each robot only requires knowledge of its own dynamics, objectives, and constraints, while coordination is achieved through trajectory information broadcast by a server. Extensive experiments demonstrate that DMBD enables scalable, sample-efficient, and coordinated planning across challenging multi-robot tasks.
+
+</p>
+
+
+
+
+<h2>Method Overview</h2>
+
+
+<div class="overview">
+
+<img src="static/images/hero.svg">
+
+
+<p>
+
+The proposed DMBD framework extends Model-Based Diffusion (MBD) from
+centralized trajectory optimization to distributed multi-robot inference.
+
+At every denoising iteration:
+
+<br><br>
+
+<b>1.</b> Each robot maintains its own noisy control trajectory.
+
+<br>
+
+<b>2.</b> Robots independently perform local conditional denoising using their
+local dynamics, objectives, and constraints while being conditioned on the latest trajectory estimates of other robots.
+
+<br>
+
+<b>3.</b> Updated state trajectories are transmitted to a server.
+
+<br>
+
+<b>4.</b> The server aggregates and broadcasts trajectory estimates to the robots for the next denoising iteration.
+
+<br><br>
+
+</p>
+
+</div>
+
+
+<h2>Advantages</h2>
+
+<ul>
+    <li>
+        <b>🤖 Scalability:</b>
+        DMBD decomposes inference from the joint multi-robot trajectory space
+        into individual robot trajectory spaces, improving scalability with increasing team size. 
+    </li>
+
+    <li>
+        <b>🧩 Modularity:</b>
+        Each robot only requires knowledge of its own dynamics, objectives, and
+        constraints, without requiring a global model of other robots. 
+    </li>
+
+    <li>
+        <b>🚀 Computational Efficiency:</b>
+        DMBD distributes local conditional denoising processes across robots and
+        executes them in parallel, reducing planning time. It achieves
+        sub-second planning for large-scale problems with up to 9,800
+        optimization dimensions (20 robots, 245 time steps, and 2D control
+        inputs), comared to 5+ seconds for centralized MBD.
+    </li>
+</ul>
+
+
+
+
+
+<h2>Experimental Results</h2>
+
+
+<div class="results">
+
+We evaluate DMBD on multiple multi-robot coordination tasks:
+
+<ul>
+
+<li>
+Goal swapping with circular robots.
+</li>
+
+<li>
+Goal swapping with rectangular vehicles.
+</li>
+
+<li>
+Multi-floor heterogeneous robot coverage.
+</li>
+
+<li>
+Parking and rush-hour coordination scenarios.
+</li>
+
+</ul>
+
+
+DMBD achieves strong scalability by maintaining high success rates
+while reducing planning time as the number of robots increases.
+
+</div>
+
+
+
+<p>
+<b>Goal Swapping with 20 Circular Robots:</b> Twenty circular robots exchange their initial positions with the robots on the opposite side of the circle while avoiding inter-robot collisions.
+</p>
+
+
+<div class="video-container">
+
+<div class="video-grid">
+
+    <div class="video-item">
+        <video autoplay muted loop preload="metadata">
+            <source src="static/videos/circ_swap_denoising.mp4" type="video/mp4">
+        </video>
+        <div class="video-caption">
+            Diffusion Denoising
+        </div>
+    </div>
+
+
+    <div class="video-item">
+        <video autoplay muted loop preload="metadata">
+            <source src="static/videos/circ_swap_traj.mp4" type="video/mp4">
+        </video>
+        <div class="video-caption">
+            Optimized Trajectory
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+
+<p>
+<b>Goal Swapping with 20 Rectangular Robots:</b> Twenty rectangular robots exchange their initial positions with the robots on the opposite side of the circle while avoiding inter-robot collisions.
+</p>
+`
+
+<div class="video-container">
+
+<div class="video-grid">
+
+    <div class="video-item">
+        <video autoplay muted loop preload="metadata">
+            <source src="static/videos/rect_swap_20_denoising.mp4" type="video/mp4">
+        </video>
+        <div class="video-caption">
+            Diffusion Denoising
+        </div>
+    </div>
+
+
+    <div class="video-item">
+        <video autoplay muted loop preload="metadata">
+            <source src="static/videos/rect_swap_20_traj.mp4" type="video/mp4">
+        </video>
+        <div class="video-caption">
+            Optimized Trajectory
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+
+<p>
+<b>Multi-Floor Robot Coverage with 10 Robots:</b> Heterogeneous robots navigate multiple floors (z=0 and z=5) to reach their designated goals while avoiding collisions. Smaller robots (red) can use the elevators (yellow), while larger robots (blue) remain on the first floor. Robots do not know each other's goal locations.
+</p>
+
+
+<div class="video-container">
+
+<div class="video-grid">
+
+    <div class="video-item">
+        <video autoplay muted loop preload="metadata">
+            <source src="static/videos/multi_floor_10_denoising.mp4" type="video/mp4">
+        </video>
+        <div class="video-caption">
+            Diffusion Denoising
+        </div>
+    </div>
+
+
+    <div class="video-item">
+        <video autoplay muted loop preload="metadata">
+            <source src="static/videos/multi_floor_10_traj.mp4" type="video/mp4">
+        </video>
+        <div class="video-caption">
+            Optimized Trajectory
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+
+
+<p>
+<b>Parking Scenario:</b> Two robots coordinate parking maneuvers in a
+        constrained environment. However, the problem is that the orange robot is already on its goal location while blocking the path of the orange robot. Thus, for the orange robot to park, the blue vehicle must first move out of the way, and then return to its original position without collisions. The robots do not know the goal locations of each other.
+</p>
+
+
+<div class="video-container">
+
+<div class="video-grid">
+
+    <div class="video-item">
+        <video autoplay muted loop preload="metadata">
+            <source src="static/videos/parking_denoising.mp4" type="video/mp4">
+        </video>
+        <div class="video-caption">
+            Diffusion Denoising
+        </div>
+    </div>
+
+
+    <div class="video-item">
+        <video autoplay muted loop preload="metadata">
+            <source src="static/videos/parking_traj.mp4" type="video/mp4">
+        </video>
+        <div class="video-caption">
+            Optimized Trajectory
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+<p>
+<b>Parking Scenario (with 6 robots):</b>
+</p>
+
+
+<div class="video-container">
+
+<div class="video-grid">
+
+    <div class="video-item">
+        <video autoplay muted loop preload="metadata">
+            <source src="static/videos/extra_parking_denoising.mp4" type="video/mp4">
+        </video>
+        <div class="video-caption">
+            Diffusion Denoising
+        </div>
+    </div>
+
+
+    <div class="video-item">
+        <video autoplay muted loop preload="metadata">
+            <source src="static/videos/extra_parking_traj.mp4" type="video/mp4">
+        </video>
+        <div class="video-caption">
+            Optimized Trajectory
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+
+<p>
+<b>Rush Hour:</b> The red robot is to move to the right to reach its goal locations, but its path is blocked by other robots whose paths are also blocked. The robots must coordinate to move out of the way for the red robot to reach its goal without collisions and knowledge of the goal location of the red robot.
+</p>
+
+
+<div class="video-container">
+
+<div class="video-grid">
+
+    <div class="video-item">
+        <video autoplay muted loop preload="metadata">
+            <source src="static/videos/rush_hour_denoising.mp4" type="video/mp4">
+        </video>
+        <div class="video-caption">
+            Diffusion Denoising
+        </div>
+    </div>
+
+
+    <div class="video-item">
+        <video autoplay muted loop preload="metadata">
+            <source src="static/videos/rush_hour_traj.mp4" type="video/mp4">
+        </video>
+        <div class="video-caption">
+            Optimized Trajectory
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+<p>
+<b>Rush Hour Scenario (with 6 robots):</b>
+</p>
+
+
+<div class="video-container">
+
+<div class="video-grid">
+
+    <div class="video-item">
+        <video autoplay muted loop preload="metadata">
+            <source src="static/videos/extra_rush_hour_denoising.mp4" type="video/mp4">
+        </video>
+        <div class="video-caption">
+            Diffusion Denoising
+        </div>
+    </div>
+
+
+    <div class="video-item">
+        <video autoplay muted loop preload="metadata">
+            <source src="static/videos/extra_rush_hour_traj.mp4" type="video/mp4">
+        </video>
+        <div class="video-caption">
+            Optimized Trajectory
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+
+<h3>Comparison</h3>
+
+Our method is compared against Cross Entropy Method (CEM) and Model Predictive Path Integral (MPPI), Model-Based Diffusion (MBD), and D4orm. DMBD achieves stronger scalability by maintaining high success rates while incurring the least planning time across all tasks and robot team sizes. While the performance of the baseline methods degrades rapidly with increasing team size, DMBD maintains relatively high success rates. 
+
+
+
+<img src="static/images/comparison.svg" style="width: 100%; height: auto;">
+
+
+<div class="buttons">
+
+
+</div>
+
+
+</body>
+</html>
